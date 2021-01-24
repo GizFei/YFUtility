@@ -1,5 +1,5 @@
 /**
- * java.util.Calendar类相关的扩展函数、扩展属性
+ * java.util.Calendar类相关的扩展函数、扩展属性等
  * @author GizFei created on 2021/01/20
  */
 @file:JvmName("CalendarUtils")
@@ -7,7 +7,9 @@
 package com.giz.android.yfutility.datetime
 
 import androidx.annotation.IntRange
-import java.util.*
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 /**
  * 获取年份。
@@ -21,6 +23,12 @@ val Calendar.year: Int get() = this.get(Calendar.YEAR)
  * [Calendar.JANUARY] - [Calendar.DECEMBER]
  */
 val Calendar.month: Int get() = this.get(Calendar.MONTH)
+
+/**
+ * 获取实际生活中使用的月份值。
+ * 取值：1-12。
+ */
+val Calendar.monthActual: Int get() = this.month + 1
 
 /**
  * 获取日期。当月的某一天。
@@ -159,3 +167,9 @@ fun Calendar.inDayUnit(): Calendar = this.apply {
     secondTo(0)
     millisTo(0)
 }
+
+/**
+ * 以标准（24小时制）格式化字符串表示该[Calendar]
+ */
+fun Calendar.timeText(): String
+        = SimpleDateFormat("yyyy-MM-dd kk:mm:ss", Locale.getDefault()).format(this.time)
