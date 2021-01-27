@@ -5,8 +5,10 @@
 
 package com.giz.android.yfutility.datetime
 
+import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
+import java.util.Locale
 import java.util.TimeZone
 
 /**
@@ -20,3 +22,19 @@ val Date.calendar: Calendar get() = Calendar.getInstance().also { it.time = this
  */
 fun Date.toCalendar(timeZone: TimeZone = TimeZone.getDefault()): Calendar
         = Calendar.getInstance(timeZone).apply { time = this@toCalendar }
+
+/**
+ * 将[Date]格式化成字符串
+ * @param pattern 模式
+ * @param timeZone 时区。影响解析时间的结果
+ * @param locale 地区。影响字符串语言
+ */
+fun Date.toFormatString(
+    pattern: String?,
+    timeZone: TimeZone = TimeZone.getDefault(),
+    locale: Locale = Locale.getDefault()
+): String {
+    pattern ?: return ""
+
+    return SimpleDateFormat(pattern, locale).apply { this.timeZone = timeZone }.format(this)
+}

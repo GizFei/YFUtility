@@ -2,6 +2,7 @@
  * java.text.SimpleDateFormat类的相关扩展函数、扩展属性等
  * Created by GizFei on 2021/1/21
  */
+@file:JvmName("SimpleDateFormatUtils")
 
 package com.giz.android.yfutility.datetime
 
@@ -10,7 +11,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-enum class SimpleDateFormatPattern(val pattern: String) {
+enum class DateFormatPattern(val pattern: String) {
     /**
      * 4位数年份的末尾2位。
      * 2021 -> 21
@@ -91,22 +92,37 @@ enum class SimpleDateFormatPattern(val pattern: String) {
 
     MINUTE_LONG("mm"),
 
+    MINUTE(MINUTE_LONG),
+
     SECOND_SHORT("s"),
 
     SECOND_LONG("ss"),
 
+    SECOND(SECOND_LONG),
+
     AM_PM("a"),
 
-    YEAR_MONTH("yyyy-MM"),
-    YEAR_MONTH_DAY("yyyy-MM-dd"),
+    /**
+     * 星期缩写。
+     * 如：Wed、星期三
+     */
+    WEEK_ABBR("EE"),
 
     /**
-     * 最常用的标准格式：年-月-日 时:分:秒
-     * 24小时制
+     * 星期全称。
+     * 如：Wednesday、星期三
      */
-    STANDARD("yyyy-MM-dd kk:mm:ss");
+    WEEK_FULL("EEEE"),
 
-    constructor(enumPattern: SimpleDateFormatPattern): this(enumPattern.pattern)
+    WEEK(WEEK_ABBR),
+
+    /**
+     * 最常用的日期格式：年-月-日 时:分:秒
+     * 24小时制（1-24）
+     */
+    COMMON("yyyy-MM-dd kk:mm:ss");
+
+    constructor(enumPattern: DateFormatPattern): this(enumPattern.pattern)
 
     /**
      * 将[Date]格式化成字符串。
@@ -137,3 +153,18 @@ enum class SimpleDateFormatPattern(val pattern: String) {
         null
     }
 }
+
+@JvmOverloads
+fun yearMonthDay(separator: Char = '-') = "yyyy${separator}MM${separator}dd"
+
+fun yearMonth() = "MM, yyyy"
+
+fun monthDay(separator: Char = '-') = "MM${separator}dd"
+
+fun monthDayWeek(separator: Char = '-') = "MM${separator}dd EE"
+
+@JvmOverloads
+fun hourMinuteIn12(amPm: Boolean = false) = if (amPm) "hh:mm a" else "hh:mm"
+
+@JvmOverloads
+fun hourMinuteIn24(amPm: Boolean = false) = if(amPm) "kk:mm a" else "kk:mm"
