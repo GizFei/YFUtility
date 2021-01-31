@@ -70,36 +70,104 @@ enum class DateFormatPattern(val pattern: String) {
      */
     DAY(DAY_LONG),
 
+    /**
+     * 12小时制。不补0。1-12。
+     * 凌晨0点：12:00 AM
+     * 上午8点：8:00 AM
+     * 中午12点：12:00 PM
+     * 下午7点：7:00 PM
+     */
     HOUR_12h_1based_SHORT("h"),
 
+    /**
+     * 12小时制。补0。01-12。
+     * @see HOUR_12h_1based_SHORT
+     */
     HOUR_12h_1based_LONG("hh"),
 
+    /**
+     * 12小时制。不补0，
+     * 0-11。
+     * 凌晨0点：0:00 AM
+     * 上午8点：8:00 AM
+     * 中午12点：0:00 PM
+     * 下午7点：7:00 PM
+     */
     HOUR_12h_0based_SHORT("K"),
 
+    /**
+     * 12小时制。补0，00-11。
+     * @see HOUR_12h_0based_SHORT
+     */
     HOUR_12h_0based_LONG("KK"),
 
+    /**
+     * 24小时制。不补0。
+     * 1-24。
+     * 凌晨0点：24:00
+     * 上午8点：8:00
+     * 中午12点：12:00
+     * 下午7点：19:00
+     */
     HOUR_24h_1based_SHORT("k"),
 
+    /**
+     * 24小时制。补0。1-24。
+     * @see HOUR_24h_1based_SHORT
+     */
     HOUR_24h_1based_LONG("kk"),
 
+    /**
+     * 24小时制。不补0。
+     * 0-23。
+     * 凌晨0点：0:00
+     * 上午8点：8:00
+     * 中午12点：12:00
+     * 下午7点：19:00
+     */
     HOUR_24h_0based_SHORT("H"),
 
+    /**
+     * 24小时制。补0。
+     * 00-23。
+     * @see HOUR_24h_0based_SHORT
+     */
     HOUR_24h_0based_LONG("HH"),
 
     HOUR(HOUR_12h_1based_LONG),
 
+    /**
+     * 分钟数。不补0。
+     * 0-59
+     */
     MINUTE_SHORT("m"),
 
+    /**
+     * 分钟数。补0。
+     * 00-59
+     */
     MINUTE_LONG("mm"),
 
     MINUTE(MINUTE_LONG),
 
+    /**
+     * 秒数。不补0。
+     * 0-59
+     */
     SECOND_SHORT("s"),
 
+    /**
+     * 秒数。补0。
+     * 00-59
+     */
     SECOND_LONG("ss"),
 
     SECOND(SECOND_LONG),
 
+    /**
+     * 上午、下午。
+     * 如：AM/PM、上午/下午
+     */
     AM_PM("a"),
 
     /**
